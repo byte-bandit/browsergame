@@ -2,17 +2,20 @@ browsergame
 ===========
 To successfully run the application, you will need to create a file 'includes/db_config.php' with the following content:
 
+```
 <?php
 $host     = 'URI_TO_YOUR_DATABASE_SERVER';
 $user     = 'DATABASE_USER';
 $password = 'DATABASE_USER_PASSWORD';
 $dbname   = 'DATABASE_NAME';
 ?>
+```
 
 SQL Syntax
 ==========
 You will need a database with the following content:
 
+```
 -- phpMyAdmin SQL Dump
 -- version 3.4.10.1deb1
 -- http://www.phpmyadmin.net
@@ -141,3 +144,4 @@ INSERT INTO `stats` (`stat_id`, `short`) VALUES
 (13, 'gloves'),
 (14, 'boots'),
 (15, 'pet');
+```
