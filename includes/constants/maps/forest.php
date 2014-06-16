@@ -26,18 +26,18 @@ $map = array(
  
 $monsters = array(
   1 => array(
-  	"name" => "Alte Wanderschildkr&ouml;te", 
+  	"name" => "Alte Wanderschildkröte", 
   	"image" => "dc-mon/animals/snapping_turtle.png", 
   	"health" => 10, 
   	"strength" => 5, 
   	"defense" => 5,
   	"exp" => 100,
-  	"victory1" => "Der alten lahmen Kr&ouml;te hast du aber wirklich gezeigt wer der Herr im Haus ist.",
-  	"victory2" => "Du hast den merkw&uuml;rdigen Drang, weitere wehrlose Gesch&ouml;pfe zu qu&auml;len um deine Selbstwertprobleme zu &uuml;berspielen.",
+  	"victory1" => "Der alten lahmen Kröte hast du aber wirklich gezeigt, wer der Herr im Haus ist.",
+  	"victory2" => "Du hast den merkwürdigen Drang, weitere wehrlose Geschöpfe zu quälen, um deine Selbstwertprobleme zu überspielen.",
   	"victory3" => "Hah! Die steht nicht mehr auf! Du kannst wirklich stolz auf dich sein.",
   	"defeat1" => "Das Biest hat eindeutig mit faulen Tricks gearbeitet...",
-  	"defeat2" => "Das n&auml;chste mal klappts bestimt, dem langsamen alten Ding den Hals umzudrehen. Du musst nur an dich glauben!",
-  	"defeat3" => "Diese alten ehrw&uuml;rdigen Tieren sollte man mit Respekt begegnen, so viel hast du heute gelernt."),
+  	"defeat2" => "Das nächste mal klappts bestimt, dem langsamen alten Ding den Hals umzudrehen. Du musst nur an dich glauben!",
+  	"defeat3" => "Diese alten ehrwürdigen Tieren sollte man mit Respekt begegnen, so viel hast du heute gelernt."),
   2 => array(
   	"name" => "Ameise", 
   	"image" => "dc-mon/animals/soldier_ant.png", 
@@ -48,8 +48,8 @@ $monsters = array(
   	"victory1" => "Jahaa, gegen Kleinere konntest du dich schon immer gut behaupten.",
   	"victory2" => "So, endlich kannst du die Picknick-Decke ausbreiten, Krabbeltierprobleme wirst du nicht mehr haben...",
   	"victory3" => "Na, da hast du ja wirklich gezeigt was in dir steckt!",
-  	"defeat1" => "Na warte. Das n&aml;chste mal bringst du dein Vergr&ouml;&szlig;erungsglas mit...",
+  	"defeat1" => "Na warte. Das nächste mal bringst du dein Vergrößerungsglas mit...",
   	"defeat2" => "Also dass sie ihre Freunde geholt hat war echt gemein. Ein fairer Kampf war DAS auf jeden Fall nicht!",
-  	"defeat3" => "Wer konnte denn ahnen, dass die Biester so stark zwicken k&ouml;nnen?! Das tut ja richtig weh!"),
+  	"defeat3" => "Wer konnte denn ahnen, dass die Biester so stark zwicken können?! Das tut ja richtig weh!"),
 );
 ?>
