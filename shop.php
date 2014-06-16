@@ -26,21 +26,21 @@ require_once('includes/constants/items.php');
  
 if ($_POST['buy'] && isset($items[$_POST['buy']]['price']))
 {
-  // fetch player curency balance
-  $playerMoney = getPlayerStat('money');
+    // fetch player curency balance
+    $playerMoney = getPlayerStat('money');
   
-  // and check if he has enough to purchase item
-  if ($items[$_POST['buy']]['price'] <= $playerMoney)
-  {
-    $playerMoney -= $items[$_POST['buy']]['price'];
-    updatePlayerStat('money', $playerMoney);
+    // and check if he has enough to purchase item
+    if ($items[$_POST['buy']]['price'] <= $playerMoney)
+    {
+        $playerMoney -= $items[$_POST['buy']]['price'];
+        updatePlayerStat('money', $playerMoney);
     
-    addItemToPlayerWarehouse($_POST['buy']);
+        addItemToPlayerWarehouse($_POST['buy']);
     
-    $success = 'Item bought';
-  }
-  else 
-    $error = 'Not enough currency';
+        $success = 'Item bought';
+    }
+    else 
+        $error = 'Not enough currency';
 }
  
 $templateVariables['items']    = $items;

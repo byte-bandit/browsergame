@@ -20,7 +20,7 @@
 
 if ($logged)
 {
-  $templateVariables['player'] = $player;
+    $templateVariables['player'] = $player;
 }
  
 $templateVariables['error']   = $error;

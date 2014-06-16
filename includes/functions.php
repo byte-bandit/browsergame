@@ -25,7 +25,7 @@
  */
 function do_redirect($location)
 {
-  header('Location: '.$location);
+    header('Location: '.$location);
 }
  
 /*
@@ -34,9 +34,11 @@ function do_redirect($location)
  */
 function must_login()
 {
-  global $logged;
-  if (!$logged)
-    do_redirect('login.php');
+    global $logged;
+    if (!$logged)
+    {
+        do_redirect('login.php');
+    }
 }
 
 /*
@@ -48,7 +50,7 @@ function must_login()
  */
 function levelExperience($level)
 {
-  return $level * 50;
+    return $level * 50;
 }
 
 /*
@@ -59,36 +61,36 @@ function levelExperience($level)
  */
 function addExperience($experience)
 {
-  global $player, $db;
- 
-  $player['exp'] += $experience;
+    global $player, $db;
+    
+    $player['exp'] += $experience;
   
-  // Keep checking in case the player earned enough experience
-  // for multiple levels.
-  while ($player['exp'] >= $player['expNext'])
-  {
-    ++$player['level'];
-    $player['exp'] -= $player['expNext'];  
-    $player['expNext'] = levelExperience($player['level'] + 1);
+    // Keep checking in case the player earned enough experience
+    // for multiple levels.
+    while ($player['exp'] >= $player['expNext'])
+    {
+        ++$player['level'];
+        $player['exp'] -= $player['expNext'];  
+        $player['expNext'] = levelExperience($player['level'] + 1);
 
-    //FIXME: Increase the stats in a useful manner.
-    $stat = getPlayerStat(Stat::STR);
-    updatePlayerStat(Stat::STR, $stat + 2);
+        //FIXME: Increase the stats in a useful manner.
+        $stat = getPlayerStat(Stat::STR);
+        updatePlayerStat(Stat::STR, $stat + 2);
 
-    $stat = getPlayerStat(Stat::DEX);
-    updatePlayerStat(Stat::DEX, $stat + 2);
+        $stat = getPlayerStat(Stat::DEX);
+        updatePlayerStat(Stat::DEX, $stat + 2);
 
-    $stat = getPlayerStat(Stat::INTEL);
-    updatePlayerStat(Stat::INTEL, $stat + 2);
-  }
+        $stat = getPlayerStat(Stat::INTEL);
+        updatePlayerStat(Stat::INTEL, $stat + 2);
+    }
  
-  $updateData = array(
-    'exp'     => $player['exp'],
-    'expNext' => $player['expNext'],
-    'level'   => $player['level'],
-  );
+    $updateData = array(
+        'exp'     => $player['exp'],
+        'expNext' => $player['expNext'],
+        'level'   => $player['level'],
+    );
 
-  $db->where('player_id', $player['player_id'])->update('players', $updateData);
+    $db->where('player_id', $player['player_id'])->update('players', $updateData);
 }
 
 /*
@@ -100,33 +102,33 @@ function addExperience($experience)
  */
 function getPlayerStat($stat_id, $player_id = false)
 {
-  global $db, $player;
-  
-  // if not player_id provided, get current player
-  if (!$player_id) $player_id = $player['player_id'];
-  
-  // shortname provided?
-  if (!ctype_digit((string)$stat_id))
-  {
-    $stat = $db->where('short', $stat_id)->getOne('stats', 'stat_id');
-    $stat_id = $stat['stat_id'];
-  }
-  
-  $stat = $db->where('player_id', $player_id)
-             ->where('stat_id', $stat_id)
-             ->getOne('player_stats', 'value');
-             
-  if (isset($stat['value']))
-    return $stat['value'];
- 
-  // In case we retrieve nothing, create the stat and return 0
-  $insertData = array(
-    'player_id' => $player_id,
-    'stat_id' => $stat_id
-  );
+    global $db, $player;
 
-  $db->insert('player_stats', $insertData);
-  return 0;
+    // if not player_id provided, get current player
+    if (!$player_id) $player_id = $player['player_id'];
+
+    // shortname provided?
+    if (!ctype_digit((string)$stat_id))
+    {
+        $stat = $db->where('short', $stat_id)->getOne('stats', 'stat_id');
+        $stat_id = $stat['stat_id'];
+    }
+
+    $stat = $db->where('player_id', $player_id)
+                ->where('stat_id', $stat_id)
+                ->getOne('player_stats', 'value');
+             
+    if (isset($stat['value']))
+        return $stat['value'];
+
+    // In case we retrieve nothing, create the stat and return 0
+    $insertData = array(
+        'player_id' => $player_id,
+        'stat_id' => $stat_id
+    );
+
+    $db->insert('player_stats', $insertData);
+    return 0;
 }
 
 /*
@@ -138,26 +140,26 @@ function getPlayerStat($stat_id, $player_id = false)
  */
 function updatePlayerStat($stat_id, $value, $player_id = false)
 {
-  global $db, $player;
-  
-  // if not player_id provided, get current player
-  if (!$player_id) $player_id = $player['player_id'];
-  
-  // shortname provided?
-  if (!ctype_digit((string)$stat_id))
-  {
-    $stat = $db->where('short', $stat_id)->getOne('stats', 'stat_id');
-    $stat_id = $stat['stat_id'];
-  }
- 
-  // use getPlayerStat to create the row if it doesn't exist
-  getPlayerStat($stat_id, $player_id);
-  
-  $updateData = array('value' => $value);
- 
-  $db->where('player_id', $player_id)
-     ->where('stat_id', $stat_id)
-     ->update('player_stats', $updateData, 1);
+    global $db, $player;
+
+    // if not player_id provided, get current player
+    if (!$player_id) $player_id = $player['player_id'];
+
+    // shortname provided?
+    if (!ctype_digit((string)$stat_id))
+    {
+        $stat = $db->where('short', $stat_id)->getOne('stats', 'stat_id');
+        $stat_id = $stat['stat_id'];
+    }
+
+    // use getPlayerStat to create the row if it doesn't exist
+    getPlayerStat($stat_id, $player_id);
+
+    $updateData = array('value' => $value);
+
+    $db->where('player_id', $player_id)
+        ->where('stat_id', $stat_id)
+        ->update('player_stats', $updateData, 1);
 }
  
 /*
@@ -170,12 +172,12 @@ function updatePlayerStat($stat_id, $value, $player_id = false)
  */
 function getPlayerWarehouseItem($item_id, $player_id = false)
 {
-  global $db, $player;
-  if (!$player_id) $player_id = $player['player_id'];
- 
-  return $db->where('player_id', $player_id)
-            ->where('item_id', $item_id)
-            ->getOne('warehouse', 'quantity');
+    global $db, $player;
+    if (!$player_id) $player_id = $player['player_id'];
+
+    return $db->where('player_id', $player_id)
+                ->where('item_id', $item_id)
+                ->getOne('warehouse', 'quantity');
 }
 
 /*
@@ -187,31 +189,31 @@ function getPlayerWarehouseItem($item_id, $player_id = false)
  */
 function addItemToPlayerWarehouse($item_id, $quantity = 1, $player_id = false)
 {
-  global $db, $player;
-  if (!$player_id) $player_id = $player['player_id'];
- 
-  $item = getPlayerWarehouseItem($item_id, $player_id);
- 
-  if (isset($item['quantity']))
-  {
-    $updateData = array('quantity' => $item['quantity'] + $quantity);
- 
-    $db->where('player_id', $player_id)
-       ->where('item_id', $item_id)
-       ->update('warehouse', $updateData);
+    global $db, $player;
+    if (!$player_id) $player_id = $player['player_id'];
 
-    return;
-  }
- 
-  // if we reached this line, it means user does not own
-  // current type of item_id
-  $dataInsert = array(
-    'item_id'   => $item_id,
-    'player_id' => $player_id,
-    'quantity'  => $quantity
-  );
- 
-  $db->insert('warehouse', $dataInsert);
+    $item = getPlayerWarehouseItem($item_id, $player_id);
+
+    if (isset($item['quantity']))
+    {
+        $updateData = array('quantity' => $item['quantity'] + $quantity);
+
+        $db->where('player_id', $player_id)
+            ->where('item_id', $item_id)
+            ->update('warehouse', $updateData);
+
+        return;
+    }
+
+    // if we reached this line, it means user does not own
+    // current type of item_id
+    $dataInsert = array(
+        'item_id'   => $item_id,
+        'player_id' => $player_id,
+        'quantity'  => $quantity
+    );
+
+    $db->insert('warehouse', $dataInsert);
 }
 
 /*
@@ -223,19 +225,19 @@ function addItemToPlayerWarehouse($item_id, $quantity = 1, $player_id = false)
  */
 function removeItemFromPlayerWarehouse($item_id, $quantity = 1, $player_id = false)
 {
-  global $db, $player;
-  if (!$player_id) $player_id = $player['player_id'];
- 
-  // this will decrease quantity since it will be quantity + (-another_quantity)
-  addItemToPlayerWarehouse($item_id, -$quantity, $player_id);
- 
-  // now simply check if new quantity is <= 0
-  $item = getPlayerWarehouseItem($item_id, $player_id);
- 
-  // if it is <= 0, remove the row from database
-  if ($item['quantity'] <= 0)
-    $db->where('player_id', $player_id)->where('item_id', $item_id)
-       ->delete('warehouse', 1);
+    global $db, $player;
+    if (!$player_id) $player_id = $player['player_id'];
+
+    // this will decrease quantity since it will be quantity + (-another_quantity)
+    addItemToPlayerWarehouse($item_id, -$quantity, $player_id);
+
+    // now simply check if new quantity is <= 0
+    $item = getPlayerWarehouseItem($item_id, $player_id);
+
+    // if it is <= 0, remove the row from database
+    if ($item['quantity'] <= 0)
+        $db->where('player_id', $player_id)->where('item_id', $item_id)
+            ->delete('warehouse', 1);
 }
 
 /*
@@ -246,37 +248,36 @@ function removeItemFromPlayerWarehouse($item_id, $quantity = 1, $player_id = fal
  */
 function computeStatsForBattle($player_id = false)
 {
-  global $player;
-  if (!$player_id) $player_id = $player["player_id"];
-  
-  $thePlayer["strength"] = getPlayerStat('str', $player_id);
-  $INT                   = getPlayerStat('dex', $player_id);
-  $DEX                   = getPlayerStat('int', $player_id);
-  $health                = getPlayerStat('health', $player_id);
-  
-  // stat_id's for all equipment components
-  $equipment = array(9, 10, 11, 12, 13, 14, 15);
-  require_once("includes/constants/items.php");
-  
-  foreach ($equipment as $piece)
-  {
-    $item = getPlayerStat($piece, $player_id);
-    if ($item)
+    global $player;
+    if (!$player_id) $player_id = $player["player_id"];
+
+    $thePlayer["strength"] = getPlayerStat('str', $player_id);
+    $INT                   = getPlayerStat('dex', $player_id);
+    $DEX                   = getPlayerStat('int', $player_id);
+    $health                = getPlayerStat('health', $player_id);
+
+    // stat_id's for all equipment components
+    $equipment = array(9, 10, 11, 12, 13, 14, 15);
+    require_once("includes/constants/items.php");
+
+    foreach ($equipment as $piece)
     {
-      $thePlayer["strength"] += $items[$item]["stats"][5];
-      $INT                   += $items[$item]["stats"][6];
-      $DEX                   += $items[$item]["stats"][7];
-      $health                += $items[$item]["stats"][1];
-    } 
-  }
- 
- 
-  /* Get player strength and health and compute defense as dex + int / 2 */
-  
-  $thePlayer["defense"] = $DEX + intval($INT / 2);
-  $thePlayer["health"] = $health;
- 
-  return $thePlayer;
+        $item = getPlayerStat($piece, $player_id);
+        if ($item)
+        {
+            $thePlayer["strength"] += $items[$item]["stats"][5];
+            $INT                   += $items[$item]["stats"][6];
+            $DEX                   += $items[$item]["stats"][7];
+            $health                += $items[$item]["stats"][1];
+        } 
+    }
+
+    /* Get player strength and health and compute defense as dex + int / 2 */
+
+    $thePlayer["defense"] = $DEX + intval($INT / 2);
+    $thePlayer["health"] = $health;
+
+    return $thePlayer;
 }
 
 /*
@@ -287,14 +288,14 @@ function computeStatsForBattle($player_id = false)
  */
 function getVictoryText($monster)
 {
-  $selector = rand(1, 3);
+    $selector = rand(1, 3);
 
-  if ($selector == 1)
-    return $monster['victory1'];
-  elseif ($selector == 2) 
-    return $monster['victory2'];
-  else
-    return $monster['victory3'];
+    if ($selector == 1)
+        return $monster['victory1'];
+    elseif ($selector == 2) 
+        return $monster['victory2'];
+    else
+        return $monster['victory3'];
 }
 
 /*
@@ -305,13 +306,13 @@ function getVictoryText($monster)
  */
 function getDefeatText($monster)
 {
-  $selector = rand(1, 3);
+    $selector = rand(1, 3);
 
-  if ($selector == 1)
-    return $monster['defeat1'];
-  elseif ($selector == 2) 
-    return $monster['defeat2'];
-  else
-    return $monster['defeat3'];
+    if ($selector == 1)
+        return $monster['defeat1'];
+    elseif ($selector == 2) 
+        return $monster['defeat2'];
+    else
+        return $monster['defeat3'];
 }
 ?>

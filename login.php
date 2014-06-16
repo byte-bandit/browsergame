@@ -21,26 +21,26 @@ require_once('includes/header.php');
  
 if (isset($_POST['login']))
 {
-  $username = $_POST['username'];
-  $password = $_POST['password'];
-  if (ctype_alnum($username) && strlen($username) <= 25)
-  {
-    $passwordHash = hash('sha512', 'ThisIsTheSalt'.$username.$_POST['password']);
- 
-    $check = $db->where('username', $username)
-                ->where('password', $passwordHash)
-                ->getOne('players', 'player_id');
-    if ($check['player_id'])
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    if (ctype_alnum($username) && strlen($username) <= 25)
     {
-      // login user
-      $_SESSION['player_id'] = $check['player_id'];
+        $passwordHash = hash('sha512', 'ThisIsTheSalt'.$username.$_POST['password']);
+        
+        $check = $db->where('username', $username)
+                    ->where('password', $passwordHash)
+                    ->getOne('players', 'player_id');
+        if ($check['player_id'])
+        {
+            // login user
+            $_SESSION['player_id'] = $check['player_id'];
  
-      // redirect user to index
-      do_redirect('index.php');
+            // redirect user to index
+            do_redirect('index.php');
+        }
+        else
+            $error = 'Access denied';
     }
-    else
-      $error = 'Access denied';
-  }
 }
  
 $templateVariables['display'] = 'login.tpl';

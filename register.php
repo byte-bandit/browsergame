@@ -21,59 +21,60 @@ require('includes/header.php');
  
 if (isset($_POST['register']))
 {
-  if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
-    $error = 'Invalid email';
+    if (!filter_var($_POST['email'], FILTER_VALIDATE_EMAIL))
+        $error = 'Invalid email';
  
-  if (!ctype_alnum($_POST['username']) || strlen($_POST['username']) < 3 || strlen($_POST['username']) > 25)
-    $error = 'Invalid username';
+    if (!ctype_alnum($_POST['username']) || strlen($_POST['username']) < 3 || strlen($_POST['username']) > 25)
+        $error = 'Invalid username';
  
-  if (strlen($_POST['password']) < 3 || strlen($_POST['password']) > 25)
-    $error = 'Invalid password';
+    if (strlen($_POST['password']) < 3 || strlen($_POST['password']) > 25)
+        $error = 'Invalid password';
  
-  $check = $db->where('username', $_POST['username'])->getOne('players', 'player_id');
-  if ($check['player_id'])
-    $error = 'Username already in use!';
-    
-  $check = $db->where('email', $_POST['password'])->getOne('players', 'player_id');
-  if ($check['player_id'])
-    $error = 'Email already in use!';
-  
-  if (!isset($error))
-  {
-    $success = 'Account created! Welcome, '.$_POST['username'];
-    
-    $username = $_POST['username'];
-    $passwordHash = hash('sha512', 'ThisIsTheSalt'.$username.$_POST['password']);
-    $email = $_POST['email'];
-    $expNext = levelExperience(2);
-    
-    $dataInsert = array(
-      'username' => $username,
-      'password' => $passwordHash,
-      'expNext'  => $expNext,
-      'email' => $email
-    );
- 
-    $db->insert('players', $dataInsert);
-
-    //relay player to bootstrapping
-    // check if user credentials are valid
-    $check = $db->where('username', $username)
-                ->where('password', $passwordHash)
-                ->getOne('players', 'player_id');
+    $check = $db->where('username', $_POST['username'])->getOne('players', 'player_id');
     if ($check['player_id'])
+        $error = 'Username already in use!';
+    
+    $check = $db->where('email', $_POST['password'])->getOne('players', 'player_id');
+    if ($check['player_id'])
+        $error = 'Email already in use!';
+  
+    if (!isset($error))
     {
-      // login user
-      $_SESSION['player_id'] = $check['player_id'];
+        $success = 'Account created! Welcome, '.$_POST['username'];
+    
+        $username = $_POST['username'];
+        $passwordHash = hash('sha512', 'ThisIsTheSalt'.$username.$_POST['password']);
+        $email = $_POST['email'];
+        $expNext = levelExperience(2);
+    
+        $dataInsert = array(
+            'username' => $username,
+            'password' => $passwordHash,
+            'expNext'  => $expNext,
+            'email' => $email
+        );
  
-      // redirect user to index
-      do_redirect('bootstrap.php');
-    }
-    else
-    {
-      $error = 'An error occured during bootstrapping. Access denied';
-    }
-  } 
+        $db->insert('players', $dataInsert);
+
+        //relay player to bootstrapping
+        // check if user credentials are valid
+        $check = $db->where('username', $username)
+                    ->where('password', $passwordHash)
+                    ->getOne('players', 'player_id');
+                    
+        if ($check['player_id'])
+        {
+            // login user
+            $_SESSION['player_id'] = $check['player_id'];
+ 
+            // redirect user to index
+            do_redirect('bootstrap.php');
+        }
+        else
+        {
+            $error = 'An error occured during bootstrapping. Access denied';
+        }
+    } 
 } 
  
 $templateVariables['display'] = 'register.tpl';

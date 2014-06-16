@@ -26,38 +26,38 @@ require_once('includes/constants/items.php');
 // if the requested item is of type usable in our constants
 if (isset($_POST['use']) && isset($items[$_POST['use']]['usable']))
 {
-  // fetch user warehouse data for item $_POST['use']
-  $item = getPlayerWarehouseItem($_POST['use']);
- 
-  if ($item['quantity'] > 0)
-  {
-    // increase the stats according to $items[$_POST['use']]['stats']
-    foreach ($items[$_POST['use']]['stats'] as $stat_id => $value)
-      updatePlayerStat($stat_id, getPlayerStat($stat_id) + $value);
- 
-    // now we need to remove 1 piece of this item from warehouse
-    removeItemFromPlayerWarehouse($_POST['use']); 
-  }
-}
-elseif (isset($_POST['wear']) && isset($items[$_POST['wear']]['wearable']))
-{
-   // fetch user warehouse data for item $_POST['use']
-   $item = getPlayerWarehouseItem($_POST['wear']);
+    // fetch user warehouse data for item $_POST['use']
+    $item = getPlayerWarehouseItem($_POST['use']);
  
     if ($item['quantity'] > 0)
     {
-      $stat = getPlayerStat($items[$_POST['wear']]['wearable']);
+        // increase the stats according to $items[$_POST['use']]['stats']
+        foreach ($items[$_POST['use']]['stats'] as $stat_id => $value)
+            updatePlayerStat($stat_id, getPlayerStat($stat_id) + $value);
  
-      // if player was wearing something in slot, send item to warehouse
-      if ($stat != 0) addItemToPlayerWarehouse($stat);
- 
-      // equip item
-      updatePlayerStat($items[$_POST['wear']]['wearable'], $_POST['wear']);
- 
-      // remove 1 piece of this item from warehouse
-      removeItemFromPlayerWarehouse($_POST['wear']);
+        // now we need to remove 1 piece of this item from warehouse
+        removeItemFromPlayerWarehouse($_POST['use']); 
     }
-  }
+}
+elseif (isset($_POST['wear']) && isset($items[$_POST['wear']]['wearable']))
+{
+    // fetch user warehouse data for item $_POST['use']
+    $item = getPlayerWarehouseItem($_POST['wear']);
+ 
+    if ($item['quantity'] > 0)
+    {
+        $stat = getPlayerStat($items[$_POST['wear']]['wearable']);
+ 
+        // if player was wearing something in slot, send item to warehouse
+        if ($stat != 0) addItemToPlayerWarehouse($stat);
+ 
+        // equip item
+        updatePlayerStat($items[$_POST['wear']]['wearable'], $_POST['wear']);
+ 
+        // remove 1 piece of this item from warehouse
+        removeItemFromPlayerWarehouse($_POST['wear']);
+    }
+}
  
 // Get all items from warehouse
 $warehouse = $db->where('player_id', $player['player_id'])->get('warehouse');

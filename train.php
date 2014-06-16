@@ -29,7 +29,7 @@ $levelFactor = intval($player['level'] / 2);
 $levelFactor = $levelFactor >= 1 ? $levelFactor : 1;
  
 foreach ($statsToGive as $stat_id => &$defaultValue)
-  $defaultValue = $defaultValue * $levelFactor;
+    $defaultValue = $defaultValue * $levelFactor;
  
 // check if player has trained in the last 24 hours
 $check = $db->where('player_id', $player['player_id'])
@@ -37,22 +37,22 @@ $check = $db->where('player_id', $player['player_id'])
             ->getOne('player_train_logs', 'created');
  
 if (!isset($check['created']))   
-  $whenCanTrain = 'now';
+    $whenCanTrain = 'now';
 else
-  $whenCanTrain = date('d/F/Y H:m:s', $check['created'] + 24*60*60);      
+    $whenCanTrain = date('d/F/Y H:m:s', $check['created'] + 24*60*60);      
  
 if ($_POST['train'] && $whenCanTrain == 'now')
 {
-  foreach ($statsToGive as $stat_id => $value)
-  {
-    $statValue = getPlayerStat($stat_id);
-    updatePlayerStat($stat_id, $statValue + $value);
-  }
+    foreach ($statsToGive as $stat_id => $value)
+    {
+        $statValue = getPlayerStat($stat_id);
+        updatePlayerStat($stat_id, $statValue + $value);
+    }
  
-  $dataInsert = array('player_id' => $player['player_id'], 'created' => time());
-  $db->insert('player_train_logs', $dataInsert);
+    $dataInsert = array('player_id' => $player['player_id'], 'created' => time());
+    $db->insert('player_train_logs', $dataInsert);
   
-  do_redirect('train.php');
+    do_redirect('train.php');
 }
  
 $templateVariables['whenCanTrain'] = $whenCanTrain;

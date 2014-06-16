@@ -41,8 +41,8 @@ $logged = false;
  
 if (isset($_SESSION['player_id']))
 {
-  $player = $db->where('player_id', $_SESSION['player_id'])->getOne('players');
-  $logged = true;
+    $player = $db->where('player_id', $_SESSION['player_id'])->getOne('players');
+    $logged = true;
 }
  
 require('functions.php');
@@ -60,7 +60,7 @@ $player['money']     = getPlayerStat('money');
 $player['pet']       = getPlayerStat('pet');
 if ($player["pet"])
 {
-  require_once("includes/constants/items.php");
-  $player["pet"] = $items[$player["pet"]]["name"];
+    require_once("includes/constants/items.php");
+    $player["pet"] = $items[$player["pet"]]["name"];
 }
 ?>

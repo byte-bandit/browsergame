@@ -23,16 +23,16 @@ must_login();
 
 if (getPlayerStat(Stat::HEALTH_MAX) == 0)
 {
-  $id = $player['player_id'];
+    $id = $player['player_id'];
 
-  updatePlayerStat(Stat::HEALTH, 20, $id);
-  updatePlayerStat(Stat::HEALTH_MAX, 20, $id);
-  updatePlayerStat(Stat::ENERGY, 10, $id);
-  updatePlayerStat(Stat::ENERGY_MAX, 10, $id);
-  updatePlayerStat(Stat::STR, 5, $id);
-  updatePlayerStat(Stat::DEX, 5, $id);
-  updatePlayerStat(Stat::INTEL, 5, $id);
-  updatePlayerStat(Stat::GOLD, 20, $id);
+    updatePlayerStat(Stat::HEALTH, 20, $id);
+    updatePlayerStat(Stat::HEALTH_MAX, 20, $id);
+    updatePlayerStat(Stat::ENERGY, 10, $id);
+    updatePlayerStat(Stat::ENERGY_MAX, 10, $id);
+    updatePlayerStat(Stat::STR, 5, $id);
+    updatePlayerStat(Stat::DEX, 5, $id);
+    updatePlayerStat(Stat::INTEL, 5, $id);
+    updatePlayerStat(Stat::GOLD, 20, $id);
 }
 
 do_redirect('index.php');

@@ -17,22 +17,22 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-	abstract class Stat
-	{
-	    const HEALTH = 'health';
-	    const HEALTH_MAX = 'health_max';
-	    const ENERGY = 'energy';
-	    const ENERGY_MAX = 'energy_max';
-	    const STR = 'str';
-	    const DEX = 'dex';
-	    const INTEL = 'int';
-	    const GOLD = 'money';
-	    const WEAPON_PRIMARY = 'f_weap';
-	    const WEAPON_SECONDARY = 's_weap';
-	    const ARMOR_HELMET = 'helmet';
-	    const ARMOR_CHEST = 'armor';
-	    const ARMOR_GLOVES = 'gloves';
-	    const ARMOR_BOOTS = 'boots';
-	    const PET = 'pet';
-	}
+    abstract class Stat
+    {
+        const HEALTH = 'health';
+        const HEALTH_MAX = 'health_max';
+        const ENERGY = 'energy';
+        const ENERGY_MAX = 'energy_max';
+        const STR = 'str';
+        const DEX = 'dex';
+        const INTEL = 'int';
+        const GOLD = 'money';
+        const WEAPON_PRIMARY = 'f_weap';
+        const WEAPON_SECONDARY = 's_weap';
+        const ARMOR_HELMET = 'helmet';
+        const ARMOR_CHEST = 'armor';
+        const ARMOR_GLOVES = 'gloves';
+        const ARMOR_BOOTS = 'boots';
+        const PET = 'pet';
+        }
 ?>

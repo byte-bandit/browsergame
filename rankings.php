@@ -23,7 +23,7 @@ require_once('includes/header.php');
 must_login();
  
 $rankings = $db->orderBy('level', 'desc')
-               ->get('players', null, 'player_id, username, level');
+                    ->get('players', null, 'player_id, username, level');
  
 $templateVariables['rankings'] = $rankings;
 $templateVariables['display'] = 'rankings.tpl';
