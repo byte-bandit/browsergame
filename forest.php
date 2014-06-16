@@ -117,6 +117,27 @@ if ($_POST["fight"] && $_SESSION["monsterFight"])
 
         // give exp
         addExperience($monster['exp']);
+        
+        // calculate loot
+        foreach($monster['loot'] as $lootId => $lootset)
+        {
+            $itemID = -1;
+            foreach($lootset as $key => $value)
+            {
+                if ($key == "id")
+                {
+                    $itemID = $value;
+                }
+                elseif ($key == "rate")
+                {
+                    if (rand(1,100) <= ($value * 100))
+                    {
+                        addItemToPlayerWarehouse($itemID, 1);
+                        $success .= " Du hast einen Gegenstand gefunden!";
+                    }
+                }
+            }
+        }
     }
     else 
     {
