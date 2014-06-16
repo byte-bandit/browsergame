@@ -27,7 +27,7 @@ $items = array(
         'wearable' => 'f_weap',
         'stats' => array(
             'str' => 1
-        ),
+        )
     ),
     2 => array(
         'name' => 'Milchreis',
@@ -38,7 +38,7 @@ $items = array(
         'usable' => true,
         'stats' => array(
             'str' => 1
-        ),
+        )
     ),
     3 => array(
         'name' => 'Lederhut',
@@ -48,7 +48,7 @@ $items = array(
         'wearable' => 'helmet',
         'stats' => array(
             'int' => 1
-        ),
+        )
     ),
     5 => array(
         'name' => 'Lederschürze',
@@ -58,7 +58,7 @@ $items = array(
         'wearable' => 'armour',
         'stats' => array(
             'str' => 1
-        ),
+        )
     ),
     6 => array(
         'name' => 'Lederstulplen',
@@ -69,7 +69,7 @@ $items = array(
         'stats' => array(
             'int' => 1,
             'dex' => -1
-        ),
+        )
     ),
     7 => array(
         'name' => 'Ausgelatschte Treter',
@@ -79,7 +79,7 @@ $items = array(
         'wearable' => 'boots',
         'stats' => array(
             'dex' => 1
-        ),
+        )
     ),
     8 => array(
         'name' => 'Golem',
@@ -91,7 +91,7 @@ $items = array(
         'stats' => array(
             'str' => 7,
             'dex' => 5
-        ),
+        )
     ),
     9 => array(
         'name' => 'Hund',
@@ -103,7 +103,7 @@ $items = array(
         'stats' => array(
             'str' => 3,
             'dex' => 2
-        ),
+        )
     ),
     10 => array(
         'name' => 'Stein',
@@ -114,7 +114,7 @@ $items = array(
         'wearable' => 'f_weap',
         'stats' => array(
             'dex' => 1
-        ),
+        )
     ),
     11 => array(
         'name' => 'Holzschild',
@@ -126,6 +126,7 @@ $items = array(
         'stats' => array(
             'str' => 1,
             'dex' => -1
-        ),
-    ),
-),
+        )
+    )
+)
+?>
