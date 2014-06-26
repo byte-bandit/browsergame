@@ -17,4 +17,12 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-require('app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'index.php');
+class HomeRoute extends Route
+{
+    public function index()
+    {
+        $this->redirectIfUserIsNotLoggedIn();
+        $this->template = 'home.tpl';
+        $this->render();
+    }
+}

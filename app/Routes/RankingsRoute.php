@@ -1,6 +1,6 @@
 <?php
 /**
-*    Filename: index.php
+*    Filename: rankings.php
 *    Author:Christian Lohr
 *
 *    This program is free software: you can redistribute it and/or modify
@@ -17,4 +17,19 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-require('app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'index.php');
+ 
+class RankingsRoute extends Route
+{
+    public function index()
+    {
+        $this->redirectIfUserIsNotLoggedIn();
+        $this->template = 'rankings.tpl';
+
+        $rankings = $this->Database->orderBy('level', 'desc')
+                                   ->get('players', null, 'player_id, username, level');
+         
+        $this->set('rankings', $rankings);
+
+        $this->render();
+    }
+}

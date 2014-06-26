@@ -1,6 +1,6 @@
 <?php
 /**
-*    Filename: index.php
+*    Filename: stats.php
 *    Author:Christian Lohr
 *
 *    This program is free software: you can redistribute it and/or modify
@@ -17,4 +17,21 @@
 *    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *
 */
-require('app' . DIRECTORY_SEPARATOR . 'webroot' . DIRECTORY_SEPARATOR . 'index.php');
+abstract class Stat
+{
+    const HEALTH = 'health';
+    const HEALTH_MAX = 'health_max';
+    const ENERGY = 'energy';
+    const ENERGY_MAX = 'energy_max';
+    const STR = 'str';
+    const DEX = 'dex';
+    const INTEL = 'int';
+    const GOLD = 'money';
+    const WEAPON_PRIMARY = 'f_weap';
+    const WEAPON_SECONDARY = 's_weap';
+    const ARMOR_HELMET = 'helmet';
+    const ARMOR_CHEST = 'armor';
+    const ARMOR_GLOVES = 'gloves';
+    const ARMOR_BOOTS = 'boots';
+    const PET = 'pet';
+}
