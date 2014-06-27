@@ -1,14 +1,18 @@
 browsergame
 ===========
-To successfully run the application, you will need to create a file 'includes/db_config.php' with the following content:
+To successfully run the application, you will need to create a file 'app/Config/database.php' with the following content:
 
 ```
 <?php
-$host     = 'URI_TO_YOUR_DATABASE_SERVER';
-$user     = 'DATABASE_USER';
-$password = 'DATABASE_USER_PASSWORD';
-$dbname   = 'DATABASE_NAME';
-?>
+class DatabaseConfig
+{
+    public static $default = array(
+        'host'     => 'ADDRESS_OF_YOUR_DATABASE_HOST',
+        'username' => 'DATABASE_USER_NAME',
+        'password' => 'DATABASE_USER_PASSWORD',
+        'database' => 'DATABASE_NAME',
+    );
+}
 ```
 
 SQL Syntax
